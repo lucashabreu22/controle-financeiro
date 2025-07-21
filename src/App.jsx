@@ -3,6 +3,7 @@ import Cards from "./components/Cards/card";
 import InputFields from "./components/InputFields/inputFields";
 import { v4 } from "uuid";
 import { useEffect, useState } from "react";
+import Relatorio from "./components/Relatorio/relatorio";
 
 function App() {
   const [despesas, setTasks] = useState(
@@ -35,6 +36,10 @@ function App() {
     return totalEntradas - totalSaidas;
   }
 
+  function onDeleteDespesa(id) {
+    setTasks(despesas.filter((despesa) => despesa.id !== id));
+  }
+
   return (
     <>
       <Header />
@@ -52,6 +57,7 @@ function App() {
           onAddDespesa={onAddDespesa}
           calculateTotal={calculateTotal}
         />
+        <Relatorio despesas={despesas} onDeleteDespesa={onDeleteDespesa} />
       </div>
     </>
   );
